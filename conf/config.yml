@@ -1,0 +1,13 @@
+3DCITYDB_PATH: <path to 3D City DB root directory>
+JAVA_CL: java
+PSQL_CL: psql
+
+PG_HOST: <server hosting your db>
+PG_USER: <your db user name>
+PG_PORT: <port>
+PG_PASSWORD: <user password>
+PG_NAME: <database name>
+PG_PATH: <path to psql>
+
+3DCITYDB_CONFIG_TEMPLATE: ./config/3dcitydb_config.xml
+SQL_TEMPLATE: ./config/CREATE_DB_TEMPLATE.sql
