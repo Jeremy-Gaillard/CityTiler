@@ -2,6 +2,7 @@ import psycopg2
 import itertools
 import json
 import numpy as np
+import pathlib
 from py3dtiles import TriangleSoup, GlTF, B3dm, BatchTable
 
 
@@ -9,7 +10,7 @@ def parseBox2D(string):
     # 'BOX(1 2, 3 4)' -> [[1,2],[3,4]]
     return [[float(coord) for coord in point.split(' ')] for point in string[4:-1].split(',')]
 
-def from_3dcitydb(cursor):
+def from_3dcitydb(cursor, outputDir):
     # Get all buildings
     cursor.execute('SELECT building.id, BOX2D(cityobject.envelope) FROM building JOIN cityobject ON building.id=cityobject.id WHERE building.id=building.building_root_id')
     buildings = []
@@ -21,13 +22,13 @@ def from_3dcitydb(cursor):
 
     tiles = kd_tree(buildings, 20)
 
+    path = pathlib.Path(outputDir).expanduser()
+    pathlib.Path(path, 'tiles').mkdir(parents=True, exist_ok=True)
     for i, t in enumerate(tiles):
-        continue
-        print(i)
         ids = tuple([b[0] for b in t])
         centroid = [sum([b[1][0] for b in t]) / len(t), sum([b[1][1] for b in t]) / len(t)]
         b3dm = create_tile(cursor, ids, centroid)
-        f = open('tiles/{0}.b3dm'.format(i), 'wb')
+        f = open(str(path) + '/tiles/{0}.b3dm'.format(i), 'wb')
         f.write(b3dm.to_array())
         f.close()
 
@@ -84,7 +85,7 @@ def from_3dcitydb(cursor):
         "box": box
     }
 
-    f = open('tileset.json'.format(i), 'w')
+    f = open(str(path) + '/tileset.json'.format(i), 'w')
     f.write(json.dumps(tileset))
     f.close()
 
