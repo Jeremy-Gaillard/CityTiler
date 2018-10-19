@@ -9,7 +9,7 @@ CityTiler is a tool to convert CityGML files to 3D Tiles.
 # Installation
 
 CityTiler requires the installation of the following tools:
-- [3DCityDB](https://www.3dcitydb.org/)
+- [3DCityDB 3.3.2](https://www.3dcitydb.org/)
 - [PostgreSQL](https://www.postgresql.org/) and [PostGIS](http://postgis.net/)
 - [Python 3](https://www.python.org/)
 
