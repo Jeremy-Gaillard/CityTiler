@@ -9,5 +9,5 @@ PG_PASSWORD: <user password>
 PG_NAME: <database name>
 PG_PATH: <path to psql>
 
-3DCITYDB_CONFIG_TEMPLATE: ./config/3dcitydb_config.xml
-SQL_TEMPLATE: ./config/CREATE_DB_TEMPLATE.sql
+3DCITYDB_CONFIG_TEMPLATE: ./conf/3dcitydb_config.xml
+SQL_TEMPLATE: ./conf/CREATE_DB_TEMPLATE.sql
